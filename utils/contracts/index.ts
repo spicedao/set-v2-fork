@@ -46,6 +46,7 @@ export { ResourceIdentifierMock } from "../../typechain/ResourceIdentifierMock";
 export { SetToken } from "../../typechain/SetToken";
 export { SetTokenCreator } from "../../typechain/SetTokenCreator";
 export { SetValuer } from "../../typechain/SetValuer";
+export { CustomOracleSetValuer } from "../../typechain/CustomOracleSetValuer";
 export { SingleIndexModule } from "../../typechain/SingleIndexModule";
 export { StakingAdapterMock } from "../../typechain/StakingAdapterMock";
 export { StakingModule } from "../../typechain/StakingModule";
