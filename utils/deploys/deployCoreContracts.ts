@@ -5,9 +5,11 @@ import {
   Controller,
   IntegrationRegistry,
   PriceOracle,
+  DIAPriceOracle,
   SetToken,
   SetTokenCreator,
-  SetValuer
+  SetValuer,
+  CustomOracleSetValuer
 } from "./../contracts";
 
 import { Address } from "./../types";
@@ -15,9 +17,11 @@ import { Address } from "./../types";
 import { Controller__factory } from "../../typechain/factories/Controller__factory";
 import { IntegrationRegistry__factory } from "../../typechain/factories/IntegrationRegistry__factory";
 import { PriceOracle__factory } from "../../typechain/factories/PriceOracle__factory";
+import { DIAPriceOracle__factory } from "../../typechain/factories/DIAPriceOracle__factory";
 import { SetToken__factory } from "../../typechain/factories/SetToken__factory";
 import { SetTokenCreator__factory } from "../../typechain/factories/SetTokenCreator__factory";
 import { SetValuer__factory } from "../../typechain/factories/SetValuer__factory";
+import { CustomOracleSetValuer__factory } from "../../typechain/factories/CustomOracleSetValuer__factory";
 
 export default class DeployCoreContracts {
   private _deployerSigner: Signer;
@@ -84,6 +88,13 @@ export default class DeployCoreContracts {
     );
   }
 
+  public async deployDIAPriceOracle(
+    masterQuoteAsset: Address,
+    oracle: Address,
+  ): Promise<DIAPriceOracle> {
+    return await new DIAPriceOracle__factory(this._deployerSigner).deploy(masterQuoteAsset, oracle);
+  }
+
   public async getPriceOracle(priceOracleAddress: Address): Promise<PriceOracle> {
     return await new PriceOracle__factory(this._deployerSigner).attach(priceOracleAddress);
   }
@@ -98,5 +109,9 @@ export default class DeployCoreContracts {
 
   public async deploySetValuer(controller: Address): Promise<SetValuer> {
     return await new SetValuer__factory(this._deployerSigner).deploy(controller);
+  }
+
+  public async deployCustomOracleSetValuer(controller: Address): Promise<CustomOracleSetValuer> {
+    return await new CustomOracleSetValuer__factory(this._deployerSigner).deploy(controller);
   }
 }
